@@ -1,6 +1,10 @@
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -35,6 +39,16 @@ public class MainScreen extends JFrame {
     JTextField startCycle;
     JTextField endCycle;
     JTextField numberTV;
+
+    /*******************************  Package Panel 3 ***********************************/
+
+    JPanel packagepanel;
+
+    JCheckBox sportCheckBox;
+    JCheckBox moviesCheckBox;
+    JCheckBox documentaryCheckBox;
+
+
 
     // Constructor
     public MainScreen() {
@@ -118,12 +132,106 @@ public class MainScreen extends JFrame {
         cyclePanel.add(numberTVLabel);
         cyclePanel.add(numberTV);
 
+        /*******************************  Package Panel 3 ***********************************/
+
+        packagepanel = new JPanel();
+        Border panel3 = BorderFactory.createTitledBorder("Available Packages: ");
+        packagepanel.setBorder(panel3);
+        packagepanel.setBounds(330,15,300,200);
+        packagepanel.setLayout(new GridLayout(5,1));
+
+        JLabel packagesLabel = new JLabel("Select your packages: ");
+
+        //CheckBox
+        sportCheckBox = new JCheckBox("Sports");
+        moviesCheckBox = new JCheckBox("Movies");
+        documentaryCheckBox = new JCheckBox("Documentaries");
+
+        //Button
+        JButton subscribeBtn = new JButton("Subscribe");
+
+        packagepanel.add(packagesLabel);
+        packagepanel.add(sportCheckBox);
+        packagepanel.add(moviesCheckBox);
+        packagepanel.add(documentaryCheckBox);
+        packagepanel.add(subscribeBtn);
+
+        //Adding action listener for subscribe button
+        subscribeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    GetSubscriberData();
+                }catch (Exception ee){
+
+                }
+
+            }
+        });
+
+
+        // Checkbox Item listeners
+        sportCheckBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(sportCheckBox.isSelected()){
+                    DisplaySportsChannels();
+                    //make price changes
+                }else{
+                    
+                }
+            }
+        });
+        
+        moviesCheckBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(moviesCheckBox.isSelected()){
+                    DisplayMoviesChannels();
+                }else {
+                    
+                }
+            }
+        });
+        
+        documentaryCheckBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(documentaryCheckBox.isSelected()) {
+                    DisplayDocumentaryChannels();
+                }else{
+                    
+                }
+            }
+        });
+
+
+
         // Adding panel to JFrame
+        add(packagepanel);
         add(subscriberPanel);
         add(cyclePanel);
         setLayout(null); // null layout for jFrame
 
     }
+
+
+
+    
+
+    //Methods
+    private void GetSubscriberData() {
+    }
+    private void DisplaySportsChannels() {
+    }
+    private void DisplayMoviesChannels() {
+    }
+
+    private void DisplayDocumentaryChannels() {
+    }
+
+
+
 
     public static void main(String[] args) {
 
