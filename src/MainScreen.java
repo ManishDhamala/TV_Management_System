@@ -20,7 +20,7 @@ public class MainScreen extends JFrame {
     JLabel subMobileLabel;
     JLabel subCityLabel;
 
-    JTextField subFirstname;
+    JTextField subFirstname;   //Text-field for single line
     JTextField subLastname;
     JTextField subMobile;
     JTextField subCity;
@@ -47,6 +47,14 @@ public class MainScreen extends JFrame {
     JCheckBox sportCheckBox;
     JCheckBox moviesCheckBox;
     JCheckBox documentaryCheckBox;
+
+    /*******************************  AvailableChannels Panel 4 ***********************************/
+
+    JPanel detailsPanel;
+
+    JTextArea channelsAreaSports;   //JText-area for sports channel (multiple line)
+    JTextArea channelsAreaMovies;       //JText-area for movies channel (multiple line)
+    JTextArea channelsAreaDocumentaries;      //JText-area for Documentaries channel (multiple line)
 
 
 
@@ -77,7 +85,7 @@ public class MainScreen extends JFrame {
         subMobile = new JTextField();
         subCity = new JTextField();
 
-        // Making opacity for fields (Removing white color textField)
+        // JTextField will not have a background (Transparent)
         subFirstname.setOpaque(false);
         subLastname.setOpaque(false);
         subMobile.setOpaque(false);
@@ -118,7 +126,7 @@ public class MainScreen extends JFrame {
         endCycle = new JTextField();
         numberTV = new JTextField();
 
-        // Make opacity for fields (Removing white color textField)
+        // JTextField will not have a background (Transparent)
         startCycle.setOpaque(false);
         endCycle.setOpaque(false);
         numberTV.setOpaque(false);
@@ -135,7 +143,7 @@ public class MainScreen extends JFrame {
         /*******************************  Package Panel 3 ***********************************/
 
         packagepanel = new JPanel();
-        Border panel3 = BorderFactory.createTitledBorder("Available Packages: ");
+        Border panel3 = BorderFactory.createTitledBorder("Available Packages");
         packagepanel.setBorder(panel3);
         packagepanel.setBounds(330,15,300,200);
         packagepanel.setLayout(new GridLayout(5,1));
@@ -150,6 +158,7 @@ public class MainScreen extends JFrame {
         //Button
         JButton subscribeBtn = new JButton("Subscribe");
 
+        //Adding components to Package panel 3
         packagepanel.add(packagesLabel);
         packagepanel.add(sportCheckBox);
         packagepanel.add(moviesCheckBox);
@@ -206,11 +215,43 @@ public class MainScreen extends JFrame {
         });
 
 
+        /*******************************  AvailableChannels Panel 4 ***********************************/
+
+        detailsPanel = new JPanel();
+        Border panel4 = BorderFactory.createTitledBorder("Available Channels");
+        detailsPanel.setBorder(panel4);
+        detailsPanel.setBounds(330,230,300,500);
+        detailsPanel.setLayout(new GridLayout(3,1));
+
+        channelsAreaSports = new JTextArea(5,1);
+        channelsAreaSports.setEditable(false);  // user cannot edit the text in JTextArea
+        channelsAreaSports.setOpaque(false);    // JTextArea will not have a background (Transparent)
+        channelsAreaSports.setLineWrap(true);   // wrapping lines to fit within the available width
+
+        channelsAreaMovies = new JTextArea(5,1);
+        channelsAreaMovies.setEditable(false);
+        channelsAreaMovies.setOpaque(false);
+        channelsAreaMovies.setLineWrap(true);
+
+        channelsAreaDocumentaries = new JTextArea(5,1);
+        channelsAreaDocumentaries.setEditable(false);
+        channelsAreaDocumentaries.setOpaque(false);
+        channelsAreaDocumentaries.setLineWrap(true);
+
+        //Adding components to panel4
+        detailsPanel.add(channelsAreaSports);
+        detailsPanel.add(channelsAreaMovies);
+        detailsPanel.add(channelsAreaDocumentaries);
+
+
+
+
 
         // Adding panel to JFrame
         add(packagepanel);
         add(subscriberPanel);
         add(cyclePanel);
+        add(detailsPanel);
         setLayout(null); // null layout for jFrame
 
     }
