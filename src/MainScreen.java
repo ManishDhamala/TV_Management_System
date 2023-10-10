@@ -56,6 +56,14 @@ public class MainScreen extends JFrame {
     JTextArea channelsAreaMovies;       //JText-area for movies channel (multiple line)
     JTextArea channelsAreaDocumentaries;      //JText-area for Documentaries channel (multiple line)
 
+    /******************************* Fees Panel 5 ******************************/
+
+    JPanel feePanel;
+
+    JLabel installationFeesLabel;
+    JLabel packageFeesLabel;
+    JLabel totalFeesLabel;
+
 
 
     // Constructor
@@ -243,15 +251,33 @@ public class MainScreen extends JFrame {
         detailsPanel.add(channelsAreaMovies);
         detailsPanel.add(channelsAreaDocumentaries);
 
+        /******************************* Fees Panel 5 ******************************/
+        
+        feePanel = new JPanel();
+        Border panel5 = BorderFactory.createTitledBorder("Fees & Payments");
+        feePanel.setBorder(panel5);
+        feePanel.setBounds(645,15,200,200);
+        feePanel.setLayout(new GridLayout(3,1));
+
+        installationFeesLabel = new JLabel("Installation fees: ");
+        packageFeesLabel = new JLabel("Package fees: ");
+        totalFeesLabel = new JLabel("Total Amount: ");
+
+        //Adding component to fee panel 5
+        feePanel.add(installationFeesLabel);
+        feePanel.add(packageFeesLabel);
+        feePanel.add(totalFeesLabel);
+
 
 
 
 
         // Adding panel to JFrame
-        add(packagepanel);
-        add(subscriberPanel);
-        add(cyclePanel);
-        add(detailsPanel);
+        add(subscriberPanel);  //Panel-1
+        add(cyclePanel);       //Panel-2
+        add(packagepanel);     //Panel-3
+        add(detailsPanel);     //panel-4
+        add(feePanel);         //panel-5
         setLayout(null); // null layout for jFrame
 
     }
