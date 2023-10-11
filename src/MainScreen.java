@@ -71,6 +71,12 @@ public class MainScreen extends JFrame {
     JTable table;
     DefaultTableModel tableModel;
 
+    /******************************* Action Panel 7 ******************************/
+
+    JPanel actionPanel;
+    JButton saveButton;
+    JButton loadButton;
+    JButton newButton;
 
 
     // Constructor
@@ -284,7 +290,7 @@ public class MainScreen extends JFrame {
         customerTablePanel.setLayout(new GridLayout(3,1));
 
 
-        tableModel = new DefaultTableModel(); // Choosing deafult table model to manage the structure and data of table
+        tableModel = new DefaultTableModel(); // Choosing default table model to manage the structure and data of table
         table = new JTable(tableModel); // passing tableModel as a parameter to create a default table model
 
         // adding columns to the table
@@ -303,26 +309,76 @@ public class MainScreen extends JFrame {
         customerTablePanel.add(jScrollPane);   //JScrollPane - table - tableModel
 
 
+        /******************************* Action Panel 7 ******************************/
+
+        actionPanel = new JPanel();
+        Border panel7 = BorderFactory.createTitledBorder("Action Panel");
+        actionPanel.setBorder(panel7);
+        actionPanel.setBounds(860,15,300,200);
+        actionPanel.setLayout(new GridLayout(4,1));
+
+
+        //Buttons
+        saveButton = new JButton("Save");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveDataToDisk();
+
+            }
+        });
+
+
+        loadButton = new JButton("Load");
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadDataFromDisk();
+
+            }
+        });
+
+
+        newButton = new JButton("New");
+        newButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newData();
+
+            }
+        });
+
+
+        //Adding components to Action Panel 7
+        actionPanel.add(saveButton);
+        actionPanel.add(loadButton);
+        actionPanel.add(newButton);
 
 
 
 
         // Adding panel to JFrame
-        add(subscriberPanel);  //Panel-1
-        add(cyclePanel);       //Panel-2
-        add(packagepanel);     //Panel-3
-        add(detailsPanel);     //panel-4
-        add(feePanel);         //panel-5
-        add(customerTablePanel); //Panel-6
+        add(subscriberPanel);         //Panel-1
+        add(cyclePanel);              //Panel-2
+        add(packagepanel);            //Panel-3
+        add(detailsPanel);            //panel-4
+        add(feePanel);               //panel-5
+        add(customerTablePanel);     //Panel-6
+        add(actionPanel);            //Panel-7
         setLayout(null); // null layout for jFrame
 
     }
 
 
 
-    
-
     //Methods
+
+    private void saveDataToDisk() {
+    }
+    private void loadDataFromDisk() {
+    }
+    private void newData() {
+    }
     private void GetSubscriberData() {
     }
     private void DisplaySportsChannels() {
@@ -340,7 +396,7 @@ public class MainScreen extends JFrame {
 
         MainScreen mainScreen = new MainScreen();
         mainScreen.setVisible(true);
-        mainScreen.setBounds(100, 10, 1000, 800);
+        mainScreen.setBounds(20,10,1200,800);
 
     }
 
