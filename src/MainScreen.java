@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,6 +64,12 @@ public class MainScreen extends JFrame {
     JLabel installationFeesLabel;
     JLabel packageFeesLabel;
     JLabel totalFeesLabel;
+
+    /******************************* Customer Table Panel 6 ******************************/
+
+    JPanel customerTablePanel;
+    JTable table;
+    DefaultTableModel tableModel;
 
 
 
@@ -268,6 +275,34 @@ public class MainScreen extends JFrame {
         feePanel.add(packageFeesLabel);
         feePanel.add(totalFeesLabel);
 
+        /******************************* Customer Table Panel 6 ******************************/
+
+        customerTablePanel = new JPanel();
+        Border panel6 = BorderFactory.createTitledBorder("Customers");
+        customerTablePanel.setBorder(panel6);
+        customerTablePanel.setBounds(645,230,515,500);
+        customerTablePanel.setLayout(new GridLayout(3,1));
+
+
+        tableModel = new DefaultTableModel(); // Choosing deafult table model to manage the structure and data of table
+        table = new JTable(tableModel); // passing tableModel as a parameter to create a default table model
+
+        // adding columns to the table
+        tableModel.addColumn("First Name");
+        tableModel.addColumn("Last Name");
+        tableModel.addColumn("Phone Number");
+        tableModel.addColumn("Start Date");
+        tableModel.addColumn("Expiry Date");
+        tableModel.addColumn("Total Amount");
+
+
+        //ScrollPane for horizontal and vertical scroll
+        JScrollPane jScrollPane = new JScrollPane(table);
+
+        //Adding components to the customer table panel 6
+        customerTablePanel.add(jScrollPane);   //JScrollPane - table - tableModel
+
+
 
 
 
@@ -278,6 +313,7 @@ public class MainScreen extends JFrame {
         add(packagepanel);     //Panel-3
         add(detailsPanel);     //panel-4
         add(feePanel);         //panel-5
+        add(customerTablePanel); //Panel-6
         setLayout(null); // null layout for jFrame
 
     }
