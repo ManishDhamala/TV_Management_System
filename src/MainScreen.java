@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainScreen extends JFrame {
@@ -77,6 +78,12 @@ public class MainScreen extends JFrame {
     JButton saveButton;
     JButton loadButton;
     JButton newButton;
+
+
+    //Classes and objects
+    Subscriber subscriber;
+    Subscription subscription;
+
 
 
     // Constructor
@@ -381,12 +388,99 @@ public class MainScreen extends JFrame {
     }
     private void GetSubscriberData() {
     }
+
+    //Method to display sport channels
     private void DisplaySportsChannels() {
-    }
-    private void DisplayMoviesChannels() {
+        //Creating instance of SportsChannel class
+        SportChannel c1 = new SportChannel("ESPN Sports", "ENG", "Sport", 10);
+        SportChannel c2 = new SportChannel("Fox Sports", "    ESP", "Sport", 8);
+        SportChannel c3 = new SportChannel("Sky Sports", "    AR", "Sport", 12);
+        SportChannel c4 = new SportChannel("NBC Sports", "  GER", "Sport", 9);
+        SportChannel c5 = new SportChannel("Star Sports", "    IND", "Sport", 7);
+        SportChannel c6 = new SportChannel("Euro Sports", "  ENG", "Sport", 11);
+
+        ArrayList<SportChannel> sportArrayList = new ArrayList<>();
+        sportArrayList.add(c1);
+        sportArrayList.add(c2);
+        sportArrayList.add(c3);
+        sportArrayList.add(c4);
+        sportArrayList.add(c5);
+        sportArrayList.add(c6);
+
+        String sportChannelString = "";
+
+        //Iterating over sportArrayList(Arraylist) to get their name,language and price
+        for(int i = 0; i<sportArrayList.size(); i++){
+            sportChannelString += "          "+sportArrayList.get(i).getChannelName()
+                    +"           "+sportArrayList.get(i).getLanguage()
+                    +"           "+sportArrayList.get(i).getPrice()
+                    +"\n";     //Creating a new line
+        }
+        channelsAreaSports.setText(sportChannelString);
     }
 
+
+    //Method to display movie channels
+    private void DisplayMoviesChannels() {
+        //Creating instance of MoviesChannel lass
+        MovieChannel c1 = new MovieChannel("Action Flicks", "ENG", "Movie", 10);
+        MovieChannel c2 = new MovieChannel("Max Cinema", "GER", "Movie", 8);
+        MovieChannel c3 = new MovieChannel("Zoom Plus", "   ESP", "Movie", 12);
+        MovieChannel c4 = new MovieChannel("Film Fest", "     ENG", "Movie", 9);
+        MovieChannel c5 = new MovieChannel("Family Movie ", "IND", "Movie", 7);
+        MovieChannel c6 = new MovieChannel("Horror Movie ", "AR", "Movie", 11);
+
+        ArrayList<MovieChannel> movieArrayList = new ArrayList<>();
+        movieArrayList.add(c1);
+        movieArrayList.add(c2);
+        movieArrayList.add(c3);
+        movieArrayList.add(c4);
+        movieArrayList.add(c5);
+        movieArrayList.add(c6);
+
+        String movieChannelString = "";
+
+        //Iterating over movieArrayList(Arraylist) to get their name,language and price
+        for(int i = 0; i<movieArrayList.size(); i++){
+            movieChannelString += "          "+movieArrayList.get(i).getChannelName()
+                                   +"           "+movieArrayList.get(i).getLanguage()
+                                   +"           "+movieArrayList.get(i).getPrice()
+                                   +"\n";     //Creating a new line
+        }
+        channelsAreaMovies.setText(movieChannelString);
+    }
+
+
+    //Method to display documentary channels
     private void DisplayDocumentaryChannels() {
+        //Creating instance of DocumentaryChannel class
+        DocumentaryChannel c1 = new DocumentaryChannel("National Geo","ENG","DOC",2);
+        DocumentaryChannel c2 = new DocumentaryChannel("Timeline","       GER","DOC",3);
+        DocumentaryChannel c3 = new DocumentaryChannel("Journey Man","ESP","DOC",4);
+        DocumentaryChannel c4 = new DocumentaryChannel("Doc Tube","     ENG","DOC",3);
+        DocumentaryChannel c5 = new DocumentaryChannel("Canal D","        IND","DOC",2);
+        DocumentaryChannel c6 = new DocumentaryChannel("Ray Four","       AR","DOC",1);
+
+        ArrayList<DocumentaryChannel> docArrayList = new ArrayList<>();
+        docArrayList.add(c1);
+        docArrayList.add(c2);
+        docArrayList.add(c3);
+        docArrayList.add(c4);
+        docArrayList.add(c5);
+        docArrayList.add(c6);
+
+        String docChannelString = "";
+
+        //Iterating over docArrayList(Arraylist) to get their name,language and price
+        for(int i = 0; i<docArrayList.size(); i++){
+            docChannelString += "          "+docArrayList.get(i).getChannelName()
+                               +"            "+docArrayList.get(i).getLanguage()
+                               +"            "+docArrayList.get(i).getPrice()
+                               +"\n";   //Creating a new line
+        }
+        //Displaying the docChannelString in the textarea
+        channelsAreaDocumentaries.setText(docChannelString);
+
     }
 
 
