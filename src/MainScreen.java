@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -386,8 +387,49 @@ public class MainScreen extends JFrame {
     }
     private void newData() {
     }
-    private void GetSubscriberData() {
+
+    //Method to get Subscriber and subscription data
+    private void GetSubscriberData() throws ParseException {
+        //Getting current date and time
+        Date currentDate = new Date();
+
+        // getting Subscriber data
+        subscriber = new Subscriber(
+                subFirstname.getText(),
+                subLastname.getText(),
+                subMobile.getText(),
+                subCity.getText()
+        );
+
+        //Subscription cycle
+        Date startCycle1 = dateFormat.parse(startCycle.getText()); //converting startCycle date  into SimpleDateFormat
+        Date endCycle1 = dateFormat.parse(endCycle.getText());    //converting endCycle date into SimpleDateFormat
+
+        //Creating SubscriptionCycle object named cycle
+        SubscriptionCycle cycle = new SubscriptionCycle(
+                dateFormat.format(startCycle1),
+                dateFormat.format(endCycle1)
+        );
+
+        // Getting Subscription data
+        subscription = new Subscription(
+                Integer.parseInt(numberTV.getText()),
+                subscriber,
+                cycle,  // this object contains both startCycle & endCycle
+                dateFormat.format(currentDate)  //current date format as string
+        );
+
+        installationFeesLabel.setText("Installation fee: "+
+                    subscription.getTotalFee()+" $");  //Calling getTotalFee method from Subscription class
+
+        //Calling ShowPrice method
+        ShowPrice();
     }
+
+    private void ShowPrice() {
+
+    }
+
 
     //Method to display sport channels
     private void DisplaySportsChannels() {
