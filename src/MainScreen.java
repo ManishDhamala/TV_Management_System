@@ -389,7 +389,27 @@ public class MainScreen extends JFrame {
     }
     private void loadDataFromDisk() {
     }
+
+    //Method to empty all the fields
     private void newData() {
+
+        subFirstname.setText("");
+        subLastname.setText("");
+        subMobile.setText("");
+        subCity.setText("");
+
+        startCycle.setText("");
+        endCycle.setText("");
+        numberTV.setText("");
+
+        installationFeesLabel.setText("Installation fee: ");
+        packageFeesLabel.setText("Packages fee: ");
+        totalFeesLabel.setText("Total Amount: ");
+
+        sportCheckBox.setSelected(false);
+        moviesCheckBox.setSelected(false);
+        documentaryCheckBox.setSelected(false);
+
     }
 
     //Method to get Subscriber and subscription data
