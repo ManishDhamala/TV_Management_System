@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -88,6 +89,11 @@ public class MainScreen extends JFrame {
     // instance variable for showPrice()
     int packageSelectedPrice = 0;
     int totalPrice;
+
+    //Saving data variables
+    ArrayList<Subscription> listToSave = new ArrayList<>();
+    File file;
+
 
 
 
@@ -385,8 +391,40 @@ public class MainScreen extends JFrame {
 
     //Methods
 
+    //Method to save data to disk
     private void saveDataToDisk() {
+
+        listToSave.add(subscription);
+
+        //Creating a new file
+        file = new File("D:/myfile.dat");
+
+        try {
+            // Create an output stream to write to the file
+            OutputStream os = new FileOutputStream(file);
+
+            // Create an ObjectOutputStream to write objects to the output stream
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+
+            // Serialize the list of objects and write it to the ObjectOutputStream
+            oos.writeObject(listToSave);
+
+            // flush() method ensures that any data that is still in the buffer is written to the destination
+            oos.flush();
+
+            // Close the ObjectOutputStream and the output stream
+            oos.close();
+            os.close();
+
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
     private void loadDataFromDisk() {
     }
 
