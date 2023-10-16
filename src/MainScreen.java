@@ -85,6 +85,10 @@ public class MainScreen extends JFrame {
     Subscriber subscriber;
     Subscription subscription;
 
+    // instance variable for showPrice()
+    int packageSelectedPrice = 0;
+    int totalPrice;
+
 
 
     // Constructor
@@ -426,13 +430,25 @@ public class MainScreen extends JFrame {
         ShowPrice();
     }
 
+    //Method to display package price and total fee
     private void ShowPrice() {
+        if(documentaryCheckBox.isSelected()){
+            packageSelectedPrice += DisplayDocumentaryChannels();  // package price of documentary channel (0 + packagePrice)
+        }else if(moviesCheckBox.isSelected()){
+            packageSelectedPrice += DisplayMoviesChannels();     // package price of movie channel
+        }else if(sportCheckBox.isSelected()){
+            packageSelectedPrice += DisplaySportsChannels();     // package price of sport channel
+        }
 
+
+        packageFeesLabel.setText("Packages fee: "+packageSelectedPrice+" $");
+        totalPrice = subscription.getTotalFee() + packageSelectedPrice;  //Subscription total fee + package selected price
+        totalFeesLabel.setText("Total Amount: "+totalPrice+" $");
     }
 
 
-    //Method to display sport channels
-    private void DisplaySportsChannels() {
+    //Method to display sport channels and calculate package price
+    private int DisplaySportsChannels() {
         //Creating instance of SportsChannel class
         SportChannel c1 = new SportChannel("ESPN Sports", "ENG", "Sport", 10);
         SportChannel c2 = new SportChannel("Fox Sports", "    ESP", "Sport", 8);
@@ -450,6 +466,7 @@ public class MainScreen extends JFrame {
         sportArrayList.add(c6);
 
         String sportChannelString = "";
+        int packagePrice = 0;
 
         //Iterating over sportArrayList(Arraylist) to get their name,language and price
         for(int i = 0; i<sportArrayList.size(); i++){
@@ -457,13 +474,15 @@ public class MainScreen extends JFrame {
                     +"           "+sportArrayList.get(i).getLanguage()
                     +"           "+sportArrayList.get(i).getPrice()
                     +"\n";     //Creating a new line
+            packagePrice += sportArrayList.get(i).getPrice();  //Getting the individual price of sport channel and adding them
         }
         channelsAreaSports.setText(sportChannelString);
+        return packagePrice;
     }
 
 
-    //Method to display movie channels
-    private void DisplayMoviesChannels() {
+    //Method to display movie channels and calculate package price
+    private int DisplayMoviesChannels() {
         //Creating instance of MoviesChannel lass
         MovieChannel c1 = new MovieChannel("Action Flicks", "ENG", "Movie", 10);
         MovieChannel c2 = new MovieChannel("Max Cinema", "GER", "Movie", 8);
@@ -481,6 +500,7 @@ public class MainScreen extends JFrame {
         movieArrayList.add(c6);
 
         String movieChannelString = "";
+        int packagePrice = 0;
 
         //Iterating over movieArrayList(Arraylist) to get their name,language and price
         for(int i = 0; i<movieArrayList.size(); i++){
@@ -488,13 +508,15 @@ public class MainScreen extends JFrame {
                                    +"           "+movieArrayList.get(i).getLanguage()
                                    +"           "+movieArrayList.get(i).getPrice()
                                    +"\n";     //Creating a new line
+            packagePrice += movieArrayList.get(i).getPrice();   //Getting the individual price of movie channel and adding them
         }
         channelsAreaMovies.setText(movieChannelString);
+        return  packagePrice;
     }
 
 
-    //Method to display documentary channels
-    private void DisplayDocumentaryChannels() {
+    //Method to display documentary channels and calculate package price
+    private int DisplayDocumentaryChannels() {
         //Creating instance of DocumentaryChannel class
         DocumentaryChannel c1 = new DocumentaryChannel("National Geo","ENG","DOC",2);
         DocumentaryChannel c2 = new DocumentaryChannel("Timeline","       GER","DOC",3);
@@ -512,6 +534,7 @@ public class MainScreen extends JFrame {
         docArrayList.add(c6);
 
         String docChannelString = "";
+        int packagePrice = 0;
 
         //Iterating over docArrayList(Arraylist) to get their name,language and price
         for(int i = 0; i<docArrayList.size(); i++){
@@ -519,9 +542,11 @@ public class MainScreen extends JFrame {
                                +"            "+docArrayList.get(i).getLanguage()
                                +"            "+docArrayList.get(i).getPrice()
                                +"\n";   //Creating a new line
+            packagePrice += docArrayList.get(i).getPrice();   //Getting the individual price of documentary channel and adding them
         }
         //Displaying the docChannelString in the textarea
         channelsAreaDocumentaries.setText(docChannelString);
+        return  packagePrice;
 
     }
 
