@@ -396,7 +396,7 @@ public class MainScreen extends JFrame {
 
         listToSave.add(subscription);
 
-        //Creating a new file
+        //Creating a new file object
         file = new File("D:/myfile.dat");
 
         try {
@@ -406,7 +406,7 @@ public class MainScreen extends JFrame {
             // Create an ObjectOutputStream to write objects to the output stream
             ObjectOutputStream oos = new ObjectOutputStream(os);
 
-            // Serialize the list of objects and write it to the ObjectOutputStream
+            // Serialize(object -> byte stream) the list of objects and write it to the ObjectOutputStream
             oos.writeObject(listToSave);
 
             // flush() method ensures that any data that is still in the buffer is written to the destination
@@ -425,7 +425,54 @@ public class MainScreen extends JFrame {
 
     }
 
+    //Method to load data from disk
     private void loadDataFromDisk() {
+        // Create an ArrayList to store subscriptions
+        ArrayList<Subscription>  s = new ArrayList<>();
+
+        // Specify the file path
+        file = new File("D:/myfile.dat");
+
+        try {
+            // create an InputStream to read the file
+            InputStream is = new FileInputStream(file);
+
+            // Create an ObjectInputStream to deserialize(byte stream -> object) the object from the InputStream
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            // Read the ArrayList of subscriptions from the file
+            s = (ArrayList) ois.readObject();
+
+            ois.close();
+            is.close();
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        // Display each subscription data in a table
+        for(Subscription sub : s){
+            DisplaySubscriptionInTable(sub);
+        }
+
+    }
+
+    //Method to display data from disk into table
+    private void DisplaySubscriptionInTable(Subscription sub) {
+        // Adding subscription data to the table model
+        tableModel.addRow(new Object[]{                //Default table model |
+                sub.getSubscriber().getFirstName(),
+                sub.getSubscriber().getLastName(),
+                sub.getSubscriber().getMobileNo(),
+                sub.getSubscriptionCycle().getStartDate(),
+                sub.getSubscriptionCycle().getExpiryDate(),
+                sub.getTotalFee()
+        });
+
     }
 
     //Method to empty all the fields
