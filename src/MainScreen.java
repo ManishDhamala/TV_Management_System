@@ -226,6 +226,7 @@ public class MainScreen extends JFrame {
                     DisplaySportsChannels();
                     //make price changes
                 }else{
+                    channelsAreaSports.setText("");
                     
                 }
             }
@@ -237,7 +238,7 @@ public class MainScreen extends JFrame {
                 if(moviesCheckBox.isSelected()){
                     DisplayMoviesChannels();
                 }else {
-                    
+                    channelsAreaMovies.setText("");
                 }
             }
         });
@@ -248,6 +249,7 @@ public class MainScreen extends JFrame {
                 if(documentaryCheckBox.isSelected()) {
                     DisplayDocumentaryChannels();
                 }else{
+                    channelsAreaDocumentaries.setText("");
                     
                 }
             }
@@ -351,7 +353,7 @@ public class MainScreen extends JFrame {
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                loadDataFromDisk();
+                ArrayList<Subscription> k = loadDataFromDisk();
 
             }
         });
@@ -397,7 +399,7 @@ public class MainScreen extends JFrame {
         listToSave.add(subscription);
 
         //Creating a new file object
-        file = new File("D:/myfile.dat");
+        file = new File("D:\\myfile.dat");
 
         try {
             // Create an output stream to write to the file
@@ -426,12 +428,12 @@ public class MainScreen extends JFrame {
     }
 
     //Method to load data from disk
-    private void loadDataFromDisk() {
+    private ArrayList<Subscription> loadDataFromDisk() {
         // Create an ArrayList to store subscriptions
         ArrayList<Subscription>  s = new ArrayList<>();
 
         // Specify the file path
-        file = new File("D:/myfile.dat");
+        file = new File("D:\\myfile.dat");
 
         try {
             // create an InputStream to read the file
@@ -458,6 +460,8 @@ public class MainScreen extends JFrame {
         for(Subscription sub : s){
             DisplaySubscriptionInTable(sub);
         }
+
+        return s;
 
     }
 
