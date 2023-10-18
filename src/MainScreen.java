@@ -667,6 +667,7 @@ public class MainScreen extends JFrame {
         MainScreen mainScreen = new MainScreen();
         mainScreen.setVisible(true);
         mainScreen.setBounds(20,10,1200,800);
+        mainScreen.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
 
